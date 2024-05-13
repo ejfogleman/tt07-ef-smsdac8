@@ -1,53 +1,56 @@
 # Tiny Tapeout project information
 project:
-  title:        ""      # Project title
-  author:       ""      # Your name
-  discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  ""      # One line description of what your project does
+  title:        "8-bit DEM R2R DAC"      # Project title
+  author:       "Eric Fogleman"      # Your name
+  discord:      "ejfogleman"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
+  description:  "8-bit segmented mismatch-shaping R2R DAC"      # One line description of what your project does
   language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
-  clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
+  clock_hz:     10000000       # Clock frequency in Hz (or 0 if not applicable)
 
   # How many tiles your design occupies? A single tile is about 167x108 uM.
   tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
 
   # Your top module name must start with "tt_um_". Make it unique by including your github username:
-  top_module:  "tt_um_example"
+  top_module:  "tt_um_ejfogleman_smsdac8"
   
   # List your project's source files here. Source files must be in ./src and you must list each source file separately, one per line:
   source_files:        
-    - "project.v"
+    - "ef_smsdac.v"
+    - "ef_lfsr.v"
+    - "ef_smsdac8.v"
+    - "tt_um_ejfogleman_smsdac8.v"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
   # Inputs
-  ui[0]: ""
-  ui[1]: ""
-  ui[2]: ""
-  ui[3]: ""
-  ui[4]: ""
-  ui[5]: ""
-  ui[6]: ""
-  ui[7]: ""
+  ui[0]: "d_in[0]"
+  ui[1]: "d_in[1]"
+  ui[2]: "d_in[2]"
+  ui[3]: "d_in[3]"
+  ui[4]: "d_in[4]"
+  ui[5]: "d_in[5]"
+  ui[6]: "d_in[6]"
+  ui[7]: "d_in[8]"
 
   # Outputs
-  uo[0]: ""
-  uo[1]: ""
-  uo[2]: ""
-  uo[3]: ""
-  uo[4]: ""
-  uo[5]: ""
-  uo[6]: ""
-  uo[7]: ""
+  uo[0]: "d_out_0[0]"
+  uo[1]: "d_out_0[1]"
+  uo[2]: "d_out_1[0]"
+  uo[3]: "d_out_1[1]"
+  uo[4]: "d_out_2[0]"
+  uo[5]: "d_out_2[1]"
+  uo[6]: "d_out_3[0]"
+  uo[7]: "d_out_3[1]"
 
   # Bidirectional pins
-  uio[0]: ""
-  uio[1]: ""
+  uio[0]: "en_enc"
+  uio[1]: "en_dith"
   uio[2]: ""
   uio[3]: ""
   uio[4]: ""
   uio[5]: ""
   uio[6]: ""
-  uio[7]: ""
+  uio[7]: "ena_and_rst_n"
 
 # Do not change!
 yaml_version: 6

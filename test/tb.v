@@ -23,8 +23,24 @@ module tb ();
   wire [7:0] uio_out;
   wire [7:0] uio_oe;
 
+  // compute dac_v
+  wire [7:0] dac_v = 8*(uo_out[7]+uo_out[6]) + 4*(uo_out[5]+uo_out[4]) + 2*(uo_out[3]+uo_out[2]) + uo_out[1]+uo_out[0];
+
+  // compute switching sequences
+  wire [7:0] s_30 = uo_out[7] - uo_out[6];
+  reg [7:0] sum_s_30;
+
+  // sum the switching sequences
+  always @( posedge clk, negedge rst_n ) begin
+    if ( rst_n == 1'b0 )
+      sum_s_30 <= 0;
+    else
+      sum_s_30 <= sum_s_30 + s_30;
+  end
+
+  
   // Replace tt_um_example with your module name:
-  tt_um_example user_project (
+  tt_um_ejfogleman_smsdac dut(
 
       // Include power ports for the Gate Level test:
 `ifdef GL_TEST
