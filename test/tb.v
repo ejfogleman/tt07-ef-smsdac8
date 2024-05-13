@@ -40,7 +40,7 @@ module tb ();
 
   
   // Replace tt_um_example with your module name:
-  tt_um_ejfogleman_smsdac dut(
+  tt_um_ejfogleman_smsdac8 dut(
 
       // Include power ports for the Gate Level test:
 `ifdef GL_TEST
