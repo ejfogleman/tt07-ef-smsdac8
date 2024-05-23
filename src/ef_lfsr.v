@@ -7,30 +7,31 @@
  * From: A 3.3-V SINGLE-POLY CMOS AUDIO ADC DELTA–SIGMA MODULATOR WITH 98-DB 
  * PEAK SINAD AND 105-DB PEAK SFDR, Fogleman et al
  */
-`timescale 1ns / 100ps
 
-// n = 22, 1 + x + x^n, K = 11
-module ef_lfsr22_11 ( 
+/* verilator lint_off DECLFILENAME */
+// n = 20, 1 + x^3 + x^n, K = 8
+module ef_lfsr20_8 ( 
 	input i_clk, 
 	input i_rst_b, 
 	input i_en, 
-	output wire [10:0] o_r );
+	output wire [7:0] o_r );
 
-	reg [21:0] q;
-	assign o_r[10:0] = q[11:1];  
+	reg [19:0] q;
+	assign o_r[7:0] = q[8:1];  
 
 	always @( posedge i_clk, negedge i_rst_b ) begin
 		if( ~i_rst_b ) begin
-			q[21:1] <= 21'b0;
+			q[19:1] <= 19'b0;
 			q[0] <= 1'b1;
 		end
 		else begin
 			if ( i_en ) begin
-				// jumps 11 states per clock
-				q[21:11] <= q[10:0] ^ q[11:1];
-				q[10:0] <= q[21:11];
+				// jumps 8 states per clock
+				q[19:12] <= q[7:0] ^ q[10:3];
+				q[11:0] <= q[19:8];
 			end
 		end
 	end
 	
 endmodule
+/* verilator lint_on DECLFILENAME */

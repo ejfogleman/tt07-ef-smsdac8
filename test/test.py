@@ -24,15 +24,14 @@ async def test_project(dut):
     dut.rst_n.value = 1
 
     # apply input code and check after 4 cycles
-    dut._log.info("Check number conservation")
-    in_val = 0x10;
-    for ix in range(0xF):
+    dut._log.info("Check number conservation for even codes")
+    in_val = 0;
+    for ix in range(128):
       dut.ui_in.value = in_val  
       await ClockCycles(dut.clk, 4)
       dut._log.info(f"Input = {dut.ui_in.value}, Output = {dut.uo_out.value}, DAC Output = {dut.dac_v.value}")
-      assert dut.ui_in.value // 16 + 7 == dut.dac_v.value  # test number conservation
-      assert dut.uio_out.value == 0x80  # check ena_and_rst_n is high
-      in_val += 0x10  
+      assert dut.ui_in.value // 2 + 63 == dut.dac_v.value  # test number conservation
+      in_val += 2 
     
 
 

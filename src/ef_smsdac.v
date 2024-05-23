@@ -7,7 +7,7 @@
  * Fishov, Fogleman, Siragusa, Galton 
  * 2002 IEEE International Symposium on Circuits and Systems (ISCAS)
  */
- `timescale 1ns / 100ps
+/* verilator lint_off DECLFILENAME */
 
 // retiming reg
 module ef_smsdac_reg #(parameter BITS = 8) (
@@ -116,6 +116,4 @@ module ef_smsdac_mse_sb_sm(
 	end
 
 endmodule
-
-
-
+/* verilator lint_on DECLFILENAME */

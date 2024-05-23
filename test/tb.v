@@ -24,21 +24,14 @@ module tb ();
   wire [7:0] uio_oe;
 
   // compute dac_v
-  wire [7:0] dac_v = 8*(uo_out[7]+uo_out[6]) + 4*(uo_out[5]+uo_out[4]) + 2*(uo_out[3]+uo_out[2]) + uo_out[1]+uo_out[0];
+  wire [7:0] dac_v = 64*(uo_out[7]+uo_out[6]) 
+    + 32*(uo_out[5]+uo_out[4]) 
+    + 16*(uo_out[3]+uo_out[2]) 
+    + 8*(uo_out[1]+uo_out[0])
+    + 4*(uio_out[7]+uio_out[6])
+    + 2*(uio_out[5]+uio_out[4])
+    + (uio_out[3]+ uio_out[2]);
 
-  // compute switching sequences
-  wire [7:0] s_30 = uo_out[7] - uo_out[6];
-  reg [7:0] sum_s_30;
-
-  // sum the switching sequences
-  always @( posedge clk, negedge rst_n ) begin
-    if ( rst_n == 1'b0 )
-      sum_s_30 <= 0;
-    else
-      sum_s_30 <= sum_s_30 + s_30;
-  end
-
-  
   // Replace tt_um_example with your module name:
   tt_um_ejfogleman_smsdac8 dut(
 
